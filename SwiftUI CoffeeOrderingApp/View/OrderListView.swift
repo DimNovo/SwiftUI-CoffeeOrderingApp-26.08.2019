@@ -9,11 +9,10 @@
 import SwiftUI
 
 struct OrderListView: View {
-    let orders: [OrderViewModel]
-    init(orders: [OrderViewModel]) { self.orders = orders }
+    @ObservedObject private var orderListVM = OrderListViewModel()
     var body: some View {
         List {
-            ForEach(orders, id: \.id) { order in
+            ForEach(self.orderListVM.orders, id: \.id) { order in
                 VStack {
                     HStack(alignment: .top, spacing: 20) {
                         Image(order.coffeeName)
@@ -64,19 +63,7 @@ struct OrderListView: View {
 struct OrderListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            OrderListView(
-                orders: [
-                    OrderViewModel(
-                        order:
-                        Order(
-                            name: "Mary",
-                            size: "Medium",
-                            coffeeName: "Espresso",
-                            total: 3.0
-                        )
-                    )
-                ]
-            )
+            OrderListView()
         }.colorScheme(.dark)
     }
 }

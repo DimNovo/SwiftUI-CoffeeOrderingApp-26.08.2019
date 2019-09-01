@@ -9,25 +9,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject private var orderListVM = OrderListViewModel()
     @State private var showModal = false
     var body: some View {
         NavigationView{
-            OrderListView(orders: self.orderListVM.orders)
-            .navigationBarTitle("Coffee Orders")
-                .navigationBarItems(leading: Button(action: reloadOrders)
-                { Image(systemName: "arrow.clockwise")},
-                                    trailing: Button(action: showAddCoffeeView)
-                                    { Image(systemName: "plus")})
+            OrderListView()
+                .navigationBarTitle("Coffee Orders")
+                .navigationBarItems(trailing: Button(action: showAddCoffeeView)
+                { Image(systemName: "plus.square.fill.on.square.fill")
+                    .font(.title)
+                    .shadow(radius: 3)})
                 .sheet(isPresented: self.$showModal) { AddCoffeeOrderView(showModal: self.$showModal)}
         }
     }
-    private func reloadOrders() {
-        self.orderListVM.fetchOrders()
-    }
     private func showAddCoffeeView() {
         self.showModal = true
-        self.orderListVM.fetchOrders()
     }
 }
 

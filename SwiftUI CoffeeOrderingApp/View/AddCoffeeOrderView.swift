@@ -67,7 +67,7 @@ struct CoffeeCellView: View {
                 .font(.title)
                 .padding()
             Spacer()
-            Image(systemName: self.selection == self.coffee.name ? "checkmark" : "checkmark")
+            Image(systemName: "checkmark")
                 .resizable()
                 .foregroundColor((self.selection == self.coffee.name) ? .gray : .clear)
                 .frame(width: 25, height: 25)
